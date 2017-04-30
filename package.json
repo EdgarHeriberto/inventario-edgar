@@ -12,6 +12,7 @@
     "express": "~4.15.2",
     "hbs": "~4.0.1",
     "jade": "^1.11.0",
+    "method-override": "^2.3.8",
     "mongoose": "^4.9.6",
     "morgan": "~1.8.1",
     "nodemon": "^1.11.0",

@@ -1,5 +1,23 @@
-extend ./layout.jade
-block contenido
+doctype html
+html
+  head
+    title Inventario
+    meta(charset='utf-8')
+    link(href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css', rel='stylesheet')
+    link(href='css/main.css', rel='stylesheet')
+    link(href='http://fonts.googleapis.com/css?family=Pacifico', rel='stylesheet', type='text/css')
+    link(href='http://fonts.googleapis.com/css?family=Lato:300,400', rel='stylesheet', type='text/css')
+    link(href='css/animate.css', rel='stylesheet', type='text/css')
+  body
+    
+nav.large-padding.fondo-gris
+  ul.no-list.mediano
+    li.pacifico.col-md-3.inline-block
+      a.green(href='/admin') Administracion
+    li.col-md-3.inline-block
+      a(href='/agregar') Agregar elemento
+    li.col-md.-3.inline-block
+      a(href='/consulta') Mostrar Inventario
     h1 Panel de Administración
     table(class="table")
         caption Productos actuales

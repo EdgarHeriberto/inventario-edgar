@@ -2,7 +2,7 @@ extend ./layout.jade
 block contenido
     div(class="col-md-3 center-block no-float top-space text-left")
         h1 Editar Producto
-        form(method="put" action="/agregar/#{product.id}" style="margin-top:1.5em;")
+        form(method="POST" action="/editar/#{product.id}?_method=put" style="margin-top:1.5em;")
             div(class="form-group")
                 label ID del producto: 
                 input(type="text" name="id" value="#{product.id}" placeholder="ID del producto" class="form-control")
@@ -20,4 +20,4 @@ block contenido
                 textarea(name="descripcion" placeholder="Descripción del producto" class="form-control")
                     = product.descripcion
                 div(class="form-group text-right")
-                input(type="submit" class="btn btn-info" value="Guardar Producto")
+                input(type="submit" class="btn btn-info" value="Guardar Cambios")

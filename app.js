@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var pass = "123456";
 var index = require('./routes/index');
 var users = require('./routes/users');
-
+var method_override = require("method-override");
 var app = express();
 
 
@@ -28,7 +28,7 @@ mongoose.connect(url, function(err) {
 //parsear los objetos en post
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-
+app.use(method_override("_method"));
 
 //para la estructura de los productos que se almacenaran
 var productSchema = {
@@ -86,7 +86,26 @@ else{
 });
 
 
+// put de editar producto
+app.put("/editar/:id",function(req,res){
+console.log("editando");
 
+var dato = {
+  nombre:req.body.nombre,
+  cantidad:req.body.cantidad,
+  precio:req.body.precio
+};
+
+Product.update({"_id": req.params.id}, dato ,function(product){
+
+Product.find(function(err,document){
+ if(err){console.log(err);}
+res.render("admincontrol",{products:document});
+
+});
+})
+
+});
 
 //vista agregar
 app.get("/agregar",function(req,res){
