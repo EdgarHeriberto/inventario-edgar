@@ -5,7 +5,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var pass = "123456";
 var index = require('./routes/index');
 var users = require('./routes/users');
 
@@ -32,7 +32,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 //para la estructura de los productos que se almacenaran
 var productSchema = {
-  id:String,
   nombre:String,
   cantidad:Number,
   precio:Number,
@@ -45,7 +44,7 @@ var Product = mongoose.model("Product", productSchema);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'Jade');
+app.set('view engine', 'jade');
 
 
 
@@ -53,7 +52,6 @@ app.set('view engine', 'Jade');
 app.post("/agregar",function(req,res){
 
 var datos = {
-  id: req.body.id,
   nombre: req.body.nombre,
   cantidad: req.body.cantidad,
   precio: req.body.precio,
@@ -71,15 +69,60 @@ res.render("index");
 //res.render("agregar");
 });
 
+//metodo post para los admin
+app.post("/admin",function(req,res){
+if(req.body.password == pass){
+Product.find(function(err,document){
+ if(err){console.log(err);}
+res.render("admincontrol",{products:document});
+
+});
+
+}
+else{
+  res.redirect("admin");
+}
+
+});
+
+
+
 
 //vista agregar
 app.get("/agregar",function(req,res){
 
 res.render("agregar");
 
-})
+});
+
+//vista consulta 
+app.get("/consulta",function(req,res){
+
+Product.find(function(err,document){
+ if(err){console.log(err);}
+res.render("consulta",{products:document});
+
+});
+
+});
+
+//vista formulario admin
+app.get("/admin",function(req,res){
+
+res.render("admin");
+
+});
 
 
+//vista editar
+app.get("/editar/:id", function(req,res){
+var id_producto = req.params.id;
+Product.findOne({"_id": id_producto},function(err,document){
+console.log(document);
+res.render("editar",{ product: document});
+});
+
+});
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

@@ -1,0 +1,22 @@
+extend ./layout.jade
+block contenido
+    h1 Panel de Consulta
+    table(class="table")
+        caption Productos actuales 
+        thead
+            tr
+                th ID
+                th Nombre
+                th Cantidad
+                th Precio
+                th Descipción
+             
+        tbody
+            each product in products
+                tr
+                    td= product._id
+                    td= product.nombre
+                    td= product.cantidad
+                    td= product.precio
+                    td= product.descripcion
+
