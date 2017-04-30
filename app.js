@@ -117,7 +117,7 @@ res.render("agregar");
 //vista consulta 
 app.get("/consulta",function(req,res){
 
-Product.find(function(err,document){
+Product.find({ cantidad: { $gt: 0 } } ,function(err,document){
  if(err){console.log(err);}
 res.render("consulta",{products:document});
 
