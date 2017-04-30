@@ -24,15 +24,22 @@ mongoose.connect(url, function(err) {
     }
 });
        
+
+//parsear los objetos en post
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+
 //para la estructura de los productos que se almacenaran
 var productSchema = {
-  ID:String,
-  Nombre:String,
-  Cantidad:Number,
-  Precio:Number
+  id:String,
+  nombre:String,
+  cantidad:Number,
+  precio:Number,
+  descripcion:String
 };
 
-var product = mongoose.model("Product",productSchema);
+var Product = mongoose.model("Product", productSchema);
 
 
 
@@ -42,8 +49,30 @@ app.set('view engine', 'Jade');
 
 
 
-//vista agregar
+//metodo de POST de vista agregar
+app.post("/agregar",function(req,res){
 
+var datos = {
+  id: req.body.id,
+  nombre: req.body.nombre,
+  cantidad: req.body.cantidad,
+  precio: req.body.precio,
+  descripcion: req.body.descripcion
+}
+
+var product = new Product(datos);
+
+product.save(function(err){
+ console.log(product);
+res.render("index");
+});
+
+//console.log(req.body);
+//res.render("agregar");
+});
+
+
+//vista agregar
 app.get("/agregar",function(req,res){
 
 res.render("agregar");

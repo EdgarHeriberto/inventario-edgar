@@ -2,7 +2,7 @@ extend ./layout.jade
 block contenido
     div(class="col-md-3 center-block no-float top-space text-left")
         h1 Agregar Producto
-        form(mothod="post" action="agregar" style="margin-top:1.5em;")
+        form(method="post" action="/agregar" style="margin-top:1.5em;")
             div(class="form-group")
                 label ID del producto: 
                 input(type="text" name="id" placeholder="ID del producto" class="form-control")
@@ -11,10 +11,12 @@ block contenido
                 input(type="text" name="nombre" placeholder="Nombre del producto" class="form-control")
                 div(class="form-group")
                 label Cantidad a ingresar: 
-                input(type="number" name="cantidad" placeholder="Cantidad" class="form-control")
+                input(type="Number" name="cantidad" placeholder="Cantidad" class="form-control")
                 div(class="form-group")
                 label Precio del producto: 
-                input(type="number" name="precio" placeholder="Precio del producto" class="form-control")
+                input(type="Number" name="precio" placeholder="Precio del producto" class="form-control")
                 div(class="form-group")
                 label Descipción del producto: 
                 textarea(name="descripcion" placeholder="Descripción del producto" class="form-control")
+                div(class="form-group text-right")
+                input(type="submit" class="btn btn-info" value="Guardar Producto")
