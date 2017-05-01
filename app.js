@@ -104,6 +104,14 @@ Product.findOne({"_id": id},function(err,documento){
   console.log(documento, "este es");
   if( documento.precio==price ){
     console.log("mismo precio");
+
+var id_producto = req.params.id;
+Product.findOne({"_id": id_producto},function(err,document){
+console.log(document);
+res.render("editar",{ product: document});
+
+
+});
   }else{
 
 Product.update({"_id": req.params.id}, dato ,function(product){
@@ -164,8 +172,29 @@ Product.findOne({"_id": id},function(err,document){
 res.render("eliminar",{ product: document});
   }else{
 
+
+
+  Product.find(function(err,document){
+ if(err){console.log(err);}
+res.redirect("/admincontrol");
+
+});
+
+
     console.log("No se puede eliminar");
   }
+
+});
+
+});
+
+
+//vista admincontrol
+app.get("/admincontrol",function(req,res){
+
+Product.find(function(err,document){
+ if(err){console.log(err);}
+res.render("admincontrol",{products:document});
 
 });
 
