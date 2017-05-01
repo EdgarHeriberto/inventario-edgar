@@ -88,7 +88,6 @@ else{
 
 // put de editar producto
 app.put("/editar/:id",function(req,res){
-console.log("editando");
 
 var dato = {
   nombre:req.body.nombre,
@@ -100,7 +99,7 @@ Product.update({"_id": req.params.id}, dato ,function(product){
 
 Product.find(function(err,document){
  if(err){console.log(err);}
-res.render("admincontrol",{products:document});
+res.render("admin",{products:document});
 
 });
 })
@@ -140,6 +139,39 @@ Product.findOne({"_id": id_producto},function(err,document){
 console.log(document);
 res.render("editar",{ product: document});
 });
+
+});
+
+//Vista eliminar
+app.get("/eliminar/:id",function(req,res){
+var id = req.params.id;
+Product.findOne({"_id": id},function(err,document){
+  if( document.cantidad==0  ){
+res.render("eliminar",{ product: document});
+  }else{
+
+    console.log("No se puede eliminar");
+  }
+
+});
+
+});
+
+//delete de eliminar producto
+app.delete("/eliminar/:id",function(req,res){
+  var id = req.params.id;
+if(req.body.password == pass){
+ Product.remove({"_id": id},function(err){
+ if(err){
+ console.log("No se pudo eliminar el producto");
+ }
+ res.redirect("/admin");
+
+ });
+
+}else{
+  res.redirect("/admin");
+}
 
 });
 

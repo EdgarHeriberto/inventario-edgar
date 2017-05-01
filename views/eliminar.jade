@@ -19,24 +19,25 @@ nav.large-padding.fondo-gris
     li.col-md.-3.inline-block
       a(href='/consulta') Mostrar Inventario
     div(class="col-md-3 center-block no-float top-space text-left")
-        h1 Editar Producto
-        form(method="POST" action="/editar/#{product.id}?_method=put" style="margin-top:1.5em;")
+        h1 Eliminar Producto #[span= product.nombre]
+        form(method="POST" action="/eliminar/#{product.id}?_method=delete" style="margin-top:1.5em;")
             div(class="form-group")
                 label ID del producto: 
                 p=product.id
                 div(class="form-group")
                 label Nombre del producto: 
-                input(type="text" name="nombre" value="#{product.nombre}" placeholder="Nombre del producto" class="form-control" required/)
+                p= product.nombre
                 div(class="form-group")
-                label Nueva Cantidad: 
-                input(type="text" name="cantidad" value="#{product.cantidad}"  placeholder="Cantidad" class="form-control"  required/)
+                label Cantidad actual: 
+                p= product.cantidad
                 div(class="form-group")
                 label Precio del producto: 
-                input(type="text" name="precio" value="#{product.precio}"  placeholder="Precio del producto" class="form-control" required/)
+                p=product.precio
                 div(class="form-group")
                 label Descipción del producto: 
                 p= product.descripcion
                 div(class="form-group text-right")
-                input(type="submit" class="btn btn-info" value="Guardar Cambios")
-
-
+                label Para confirmar la Eliminacion ingrese contraseña: 
+                input(type="password" name="password" placeholder="Introdusca Contraseña" class="form-control")
+            div(class="form-group text-right")
+                input(type="submit" class="btn btn-info" value="Aceptar")
