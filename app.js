@@ -89,11 +89,14 @@ else{
 // put de editar producto
 app.put("/editar/:id",function(req,res){
 
+var price=req.body.precio;
+console.log(price);
 var dato = {
   nombre:req.body.nombre,
   cantidad:req.body.cantidad,
   precio:req.body.precio
 };
+
 
 Product.update({"_id": req.params.id}, dato ,function(product){
 
@@ -146,6 +149,7 @@ res.render("editar",{ product: document});
 app.get("/eliminar/:id",function(req,res){
 var id = req.params.id;
 Product.findOne({"_id": id},function(err,document){
+  console.log(document);
   if( document.cantidad==0  ){
 res.render("eliminar",{ product: document});
   }else{

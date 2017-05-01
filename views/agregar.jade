@@ -1,5 +1,23 @@
-extend ./layout.jade
-block contenido
+doctype html
+html
+  head
+    title Inventario
+    meta(charset='utf-8')
+    link(href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css', rel='stylesheet')
+    link(href='css/main.css', rel='stylesheet')
+    link(href='http://fonts.googleapis.com/css?family=Pacifico', rel='stylesheet', type='text/css')
+    link(href='http://fonts.googleapis.com/css?family=Lato:300,400', rel='stylesheet', type='text/css')
+    link(href='css/animate.css', rel='stylesheet', type='text/css')
+  body
+    
+nav.large-padding.fondo-gris
+  ul.no-list.mediano
+    li.pacifico.col-md-3.inline-block
+      a.green(href='admin') Administracion
+    li.col-md-3.inline-block
+      a(href='agregar') Agregar elemento
+    li.col-md.-3.inline-block
+      a(href='consulta') Mostrar Inventario
     div(class="col-md-3 center-block no-float top-space text-left")
         h1 Agregar Producto
         form(method="post" action="/agregar" style="margin-top:1.5em;")
@@ -7,15 +25,41 @@ block contenido
             
                 div(class="form-group")
                 label Nombre del producto: 
-                input(type="text" name="nombre" placeholder="Nombre del producto" class="form-control" required/)
+                input(type="text" name="nombre" placeholder="Nombre del producto" class="form-control" class="letras" required/)
                 div(class="form-group")
                 label Cantidad a ingresar: 
                 input(type="Number" name="cantidad" placeholder="Cantidad" class="form-control" required/)
                 div(class="form-group")
                 label Precio del producto: 
-                input(type="Text" name="precio" placeholder="Precio del producto" class="form-control" required/)
+                input(type="Number" name="precio" placeholder="Precio del producto" class="form-control" step="any" required/)
                 div(class="form-group")
                 label Descipción del producto: 
-                textarea(name="descripcion" placeholder="Descripción del producto" class="form-control" )
-                div(class="form-group text-right")
+                textarea(name="descripcion" placeholder="Descripción del producto" class="form-control" class="letras" )
+                div(class="form-group text-right" class="letras")
                 input(type="submit" class="btn btn-info" value="Guardar Producto" )
+
+    script(src='https://code.jquery.com/jquery-2.1.1.min.js')
+script.
+  $(".letras").keypress(function (key) {
+  window.console.log(key.charCode)
+  if ((key.charCode < 97 || key.charCode > 122)//letras mayusculas
+  && (key.charCode < 65 || key.charCode > 90) //letras minusculas
+  && (key.charCode != 45) //retroceso
+  && (key.charCode != 241) //ñ
+  && (key.charCode != 209) //Ñ
+  && (key.charCode != 32) //espacio
+  && (key.charCode != 225) //á
+  && (key.charCode != 233) //é
+  && (key.charCode != 237) //í
+  && (key.charCode != 243) //ó
+  && (key.charCode != 250) //ú
+  && (key.charCode != 193) //Á
+  && (key.charCode != 201) //É
+  && (key.charCode != 205) //Í
+  && (key.charCode != 211) //Ó
+  && (key.charCode != 218) //Ú
+  && (key.charCode != 46) //.
+  && (key.charCode != 44) //,
+  )
+  return false;
+  });
