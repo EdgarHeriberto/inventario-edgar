@@ -9,9 +9,12 @@ html
     link(href='http://fonts.googleapis.com/css?family=Lato:300,400', rel='stylesheet', type='text/css')
     link(href='css/animate.css', rel='stylesheet', type='text/css')
   body
-    section#main-content.full-height.text-center
-              a.right-space(href='agregar') Agregar elemento
-              a.right-space(href='consulta') Mostrar Inventario
-              a.right-space(href='admin') Administracion
-    script(src='https://code.jquery.com/jquery-2.1.1.min.js')
-    script(src='js/main.js')
+    
+nav.large-padding.fondo-gris
+  ul.no-list.mediano
+    li.pacifico.col-md-3.inline-block
+      a.green(href='admin') Administracion
+    li.col-md-3.inline-block
+      a(href='agregar') Agregar elemento
+    li.col-md.-3.inline-block
+      a(href='consulta') Mostrar Inventario

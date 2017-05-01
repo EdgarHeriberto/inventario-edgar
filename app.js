@@ -98,6 +98,14 @@ var dato = {
 };
 
 
+var id = req.params.id;
+Product.findOne({"_id": id},function(err,documento){
+ 
+  console.log(documento, "este es");
+  if( documento.precio==price ){
+    console.log("mismo precio");
+  }else{
+
 Product.update({"_id": req.params.id}, dato ,function(product){
 
 Product.find(function(err,document){
@@ -107,6 +115,8 @@ res.render("admin",{products:document});
 });
 })
 
+}
+});
 });
 
 //vista agregar
